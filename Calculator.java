@@ -8,6 +8,12 @@ public class Calculator {
 		System.out.println("What do you want to calculate dear sire?");
 		String whatToCalc = user_input.nextLine();
 
+		Vector<String> vSorted = calculations(whatToCalc);
+	    
+	    System.out.println("Result: " + vSorted.toString()); 
+	}
+
+	private static Vector<String> calculations(String whatToCalc) {
 		List<String> operators = Arrays.asList(new String[]{"+","-","*","/","(",")"});
 		Vector<String> vString = new Vector<String>(0, 3);	    
 	    
@@ -132,7 +138,6 @@ public class Calculator {
 		    }
 		    else i++;	    	
 	    }
-	    
-	    System.out.println("Result: " + vSorted.toString()); 
+		return vSorted;
 	}	
 }       
