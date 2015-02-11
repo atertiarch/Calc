@@ -1,3 +1,4 @@
+package calculator;
 import java.util.*;
 
 
@@ -13,7 +14,7 @@ public class Calculator {
 	    System.out.println("Result: " + vSorted.toString()); 
 	}
 
-	private static Vector<String> calculations(String whatToCalc) {
+	public static Vector<String> calculations(String whatToCalc) {
 		List<String> operators = Arrays.asList(new String[]{"+","-","*","/","(",")"});
 		Vector<String> vString = new Vector<String>(0, 3);	    
 	    
