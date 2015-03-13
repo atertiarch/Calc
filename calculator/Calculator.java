@@ -11,7 +11,7 @@ public class Calculator {
 
 		Vector<String> vSorted = calculations(whatToCalc);
 	    
-	    System.out.println("Result: " + vSorted.toString()); 
+	    System.out.println("Results: " + vSorted.toString()); 
 	}
 
 	public static Vector<String> calculations(String whatToCalc) {
