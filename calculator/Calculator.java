@@ -1,5 +1,6 @@
 package calculator;
 import java.util.*;
+import java.lang.ArithmeticException;
 
 
 public class Calculator {	
@@ -13,10 +14,12 @@ public class Calculator {
 	    
 	    System.out.println("Results: " + vSorted.toString()); 
 	}
+	
 
 	public static Vector<String> calculations(String whatToCalc) {
-		List<String> operators = Arrays.asList(new String[]{"+","-","*","/","(",")"});
+		List<String> operators = Arrays.asList(new String[]{"+","-","*","/","(",")","^"});
 		Vector<String> vString = new Vector<String>(0, 3);	    
+		Vector<String> vSorted = new Vector<String>(0, 1);
 	    
 	    //put everything into vector
 	    String a ="";
@@ -40,54 +43,46 @@ public class Calculator {
 	    System.out.println("Not sorted: " + vString.toString());   
 	    
 	    //sorting
-	    Vector<String> vSorted = new Vector<String>(0, 1);
 	    String stos="";
 	    
 	    for(int i=0; i<vString.size(); i++){
-
+	    	
 	    	if(vString.get(i).equals("(")){
 	    	}
+	    	
 	    	else if(vString.get(i).equals(")")){
-	    		if(stos.length()==1){
-	    			vSorted.add(stos);
-	    			stos="";
-	    		}
-	    		else if(!stos.isEmpty()){
-	    		vSorted.add(stos.substring(stos.length()-1, stos.length()));
-	    		stos = stos.substring(0, stos.length()-1);
-
-	    		if(stos.substring(stos.length()-1, stos.length()).equals("*") || stos.substring(stos.length()-1, stos.length()).equals("/")){
-		    		vSorted.add(stos.substring(stos.length()-1, stos.length()));
-		    		stos = stos.substring(0, stos.length()-1);
-		    		}
-	    		if(i==vString.size()-1){
-		    		for (int m = 0; m<stos.length(); m++){
-		    			vSorted.add(stos.substring(m, m+1));
-		    			}
-		    		}
+	    		if (!stos.isEmpty()){
+	    			while(!stos.isEmpty()){
+			    		vSorted.add(stos.substring(stos.length()-1, stos.length()));
+			    		stos = stos.substring(0, stos.length()-1);
+			    		}
 		    	}
-	    		}
-	    	else if(operators.contains(vString.get(i))){
-	    		stos = stos.concat(vString.get(i));
-	    	}
-	    	else if(i==vString.size()-1 && !operators.contains(vString.get(i))){
-	    		vSorted.add(vString.get(i));
-	    		for (int m = stos.length()-1; m>=0; m--){
-	    			vSorted.add(stos.substring(m, m+1));
-	    		}
-			}
-	    	else if(!operators.contains(vString.get(i))){
-	    		vSorted.add(vString.get(i));
 	    		
-	    		if(stos.length()==1){
-	    			vSorted.add(stos);
-	    			stos="";
+	    	}
+	    	
+	    	//if value is an operator 
+	    	else if(operators.contains(vString.get(i))){
+		    	stos = stos.concat(vString.get(i));
+		    	
+		    	
 	    		}
-	    		else if (!stos.isEmpty()){
-		    		vSorted.add(stos.substring(stos.length()-1, stos.length()));
+	    	
+	    	//if number
+	    	else {
+	    		vSorted.add(vString.get(i));	
+	    		
+	    		if(i>2 && vString.get(i-2).equals(")")){
+	    			vSorted.add(stos.substring(stos.length()-1, stos.length()));
 		    		stos = stos.substring(0, stos.length()-1);
+	    			}
+	    		else if (i==vString.size()-1){
+	    			while(!stos.isEmpty()){
+			    		vSorted.add(stos.substring(stos.length()-1, stos.length()));
+			    		stos = stos.substring(0, stos.length()-1);
+			    		}
 		    	}
 	    	}
+	    
 	    }
 	
 	    System.out.println("Sorted: " + vSorted.toString());   
@@ -131,7 +126,21 @@ public class Calculator {
 		    else if(vSorted.get(i).equals("/")){
 		    	c=Double.parseDouble(vSorted.get(i-1));
 		    	d=Double.parseDouble(vSorted.get(i-2));
-		    	x=d/c;
+		    	if (c!=0)	{
+			    	x=d/c;
+			    	vSorted.set(i, String.valueOf(x));
+			    	vSorted.remove(i-1);
+			    	vSorted.remove(i-2);  
+			    	i=0;
+			    	}
+		    	else	{
+		    		throw new ArithmeticException("Nigdy cholero nie dziel przez 0!");
+		    	}
+		    }
+		    else if(vSorted.get(i).equals("^")){
+		    	c=Double.parseDouble(vSorted.get(i-1));
+		    	d=Double.parseDouble(vSorted.get(i-2));
+		    	x=Math.pow(d, c);
 		    	vSorted.set(i, String.valueOf(x));
 		    	vSorted.remove(i-1);
 		    	vSorted.remove(i-2);  
@@ -140,5 +149,7 @@ public class Calculator {
 		    else i++;	    	
 	    }
 		return vSorted;
-	}	
-}       
+
+
+	    }
+	}

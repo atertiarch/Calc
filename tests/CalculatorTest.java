@@ -62,11 +62,11 @@ public class CalculatorTest {
 	@Test
 	public void shouldHonourBrances(){
 		//given
-		String equation = "2*(2+2)";
+		String equation = "2*(2+2)-2";
 		//when
 		Vector<String> calculations = Calculator.calculations(equation);
 		//then
-		assertTrue( 8.0 == Double.valueOf(calculations.get(0)));
+		assertTrue( 6.0 == Double.valueOf(calculations.get(0)));
 	}
 	
 	@Test(expected = ArithmeticException.class )
@@ -82,4 +82,14 @@ public class CalculatorTest {
 		
 	}
 	
+	@Test
+	public void shouldRaisePower(){
+		//given
+		String equation = "2^3";
+		//when
+		Vector<String> calculations = Calculator.calculations(equation);
+		//then
+		assertTrue( 8.0 == Double.valueOf(calculations.get(0)));
+	}
+		
 }
