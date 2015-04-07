@@ -21,7 +21,6 @@ public class Calculator {
 	public static Vector<String> calculations(String whatToCalc) {
 		
 		Vector<String> vString = new Vector<String>(0, 3);	    
-		Vector<String> vSorted = new Vector<String>(0, 1);
 	    
 	    //put everything into vector
 	    String a ="";
@@ -45,6 +44,8 @@ public class Calculator {
 	    System.out.println("Not sorted: " + vString.toString());   
 	    
 	    //sorting
+	    Vector<String> vSorted;
+	    vSorted=new Vector<String>(0, 1);
 	    String stos="";
 	    
 	    for(int i=0; i<vString.size(); i++){
