@@ -19,7 +19,6 @@ public class ArithmeticCalculator {
 	    while(operators.contains(vSorted.lastElement())){
 	    	if(vSorted.get(i).equals("-")){
 			    i = substract(vSorted, i);
-
 			}
 		    else if(vSorted.get(i).equals("+")){
 			    i = add(vSorted, i);
@@ -46,7 +45,7 @@ public class ArithmeticCalculator {
 		c=Double.parseDouble(vSorted.get(i-1));
 		d=Double.parseDouble(vSorted.get(i-2));
 		x=Math.pow(d, c);
-		i = removeValuesFromString(vSorted, i, x);
+		i = removeValuesFromVector(vSorted, i, x);
 		return i;
 	}
 
@@ -58,7 +57,7 @@ public class ArithmeticCalculator {
 		d=Double.parseDouble(vSorted.get(i-2));
 		if (c!=0)	{
 			x=d/c;
-			i = removeValuesFromString(vSorted, i, x);
+			i = removeValuesFromVector(vSorted, i, x);
 			}
 		else	{
 			throw new ArithmeticException("Nigdy cholero nie dziel przez 0!");
@@ -73,7 +72,7 @@ public class ArithmeticCalculator {
 		c=Double.parseDouble(vSorted.get(i-1));
 		d=Double.parseDouble(vSorted.get(i-2));
 		x=d*c;
-		i = removeValuesFromString(vSorted, i, x);
+		i = removeValuesFromVector(vSorted, i, x);
 		return i;
 	}
 
@@ -84,7 +83,7 @@ public class ArithmeticCalculator {
 		c=Double.parseDouble(vSorted.get(i-1));
 		d=Double.parseDouble(vSorted.get(i-2));
 		x=d+c;
-		i = removeValuesFromString(vSorted, i, x);
+		i = removeValuesFromVector(vSorted, i, x);
 		return i;
 	}
 
@@ -95,11 +94,11 @@ public class ArithmeticCalculator {
 		c=Double.parseDouble(vSorted.get(i-1));
 		d=Double.parseDouble(vSorted.get(i-2));
 		x=d-c;
-		i = removeValuesFromString(vSorted, i, x);
+		i = removeValuesFromVector(vSorted, i, x);
 		return i;
 	}
 
-	private static int removeValuesFromString(Vector<String> vSorted, int i,
+	private static int removeValuesFromVector(Vector<String> vSorted, int i,
 			double x) {
 		vSorted.set(i, String.valueOf(x));
 		vSorted.remove(i-1);
