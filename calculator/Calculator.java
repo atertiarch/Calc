@@ -17,13 +17,14 @@ public class Calculator {
 
 
 	public static void main(String[] args) {
-		Scanner user_input = new Scanner(System.in);	
+		try(Scanner user_input = new Scanner(System.in)){	
 		System.out.println("What do you want to calculate dear sire?");
 		String whatToCalc = user_input.nextLine();
 
 		Vector<String> vSorted = calculations(whatToCalc);
 	    
-	    System.out.println("Results: " + vSorted.toString()); 
+	    System.out.println("Results: " + vSorted.toString());
+	    } 
 	}
 	
 
