@@ -20,35 +20,14 @@ public class Calculator {
 
 	public static Vector<String> calculations(String whatToCalc) {
 		
-		Vector<String> vString = new Vector<String>(0, 3);	    
-	    
-	    //put everything into vector
-	    String a ="";
-	    for (int i=0; i<whatToCalc.length(); i++){
-	    	if(a.isEmpty() && operators.contains(whatToCalc.substring(i,i+1))){
-	    		vString.add(new String(whatToCalc.substring(i,i+1)));	
-			}
-			else if(a.length()>0 && operators.contains(whatToCalc.substring(i,i+1))){	
-				vString.add(new String(a));
-				vString.add(new String(whatToCalc.substring(i,i+1)));
-				a="";
-			}
-	    	else {
-	    		a = a.concat(whatToCalc.substring(i,i+1));
-	    		if(i==(whatToCalc.length()-1)){
-	    			vString.add(new String(a));
-	    		}
-			}
-	    }
+		Vector<String> vString = putInputIntoVector(whatToCalc);
 	    
 	    System.out.println("Not sorted: " + vString.toString());   
 	    
-	    //sorting
 	    Vector<String> vSorted= sortInput(vString);
 	
 	    System.out.println("Sorted: " + vSorted.toString());   
 	    
-
 	    //calculation
 		int i=0;
 	    
@@ -102,7 +81,35 @@ public class Calculator {
 	    }
 
 
+	private static Vector<String> putInputIntoVector(String whatToCalc) {
+		Vector<String> vString = new Vector<String>(0, 3);	    
+	    
+	    //put everything into vector
+	    String a ="";
+	    for (int i=0; i<whatToCalc.length(); i++){
+	    	if(a.isEmpty() && operators.contains(whatToCalc.substring(i,i+1))){
+	    		vString.add(new String(whatToCalc.substring(i,i+1)));	
+			}
+			else if(a.length()>0 && operators.contains(whatToCalc.substring(i,i+1))){	
+				vString.add(new String(a));
+				vString.add(new String(whatToCalc.substring(i,i+1)));
+				a="";
+			}
+	    	else {
+	    		a = a.concat(whatToCalc.substring(i,i+1));
+	    		if(i==(whatToCalc.length()-1)){
+	    			vString.add(new String(a));
+	    		}
+			}
+	    }
+		return vString;
+	}
+
+
 	private static Vector<String> sortInput(Vector<String> vString) {
+		
+	    //sorting
+
 		Vector<String> vSorted=new Vector<String>(0, 1);
 	    String stos="";
 	    
