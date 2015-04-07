@@ -1,6 +1,7 @@
 package calculator;	
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,8 +9,6 @@ import java.util.Vector;
 
 public class ArithmeticCalculator {
 	
-	private static final List<String> operators = Arrays.asList(new String[]{"+","-","*","/","^"});
-
 	private static final Map<String, Operation> map = new HashMap<>();
 	static{
 		map.put("+", ArithmeticCalculator::add);
@@ -19,15 +18,15 @@ public class ArithmeticCalculator {
 		map.put("^", ArithmeticCalculator::power);
 	}
 	
-	public static List<String> getSupportedOperatos(){
-		return operators;
+	public static Collection<String> getSupportedOperatos(){
+		return map.keySet();
 	}
 	
 	public static Vector<String> calculateExpression(Vector<String> vSorted) {
 		//calculation
 		int i=0;
 	    
-	    while(operators.contains(vSorted.lastElement())){
+	    while(getSupportedOperatos().contains(vSorted.lastElement())){
 
 	    	if(map.containsKey(vSorted.get(i))){
 	    		i=map.get(vSorted.get(i)).doOperation(vSorted, i);	    		
