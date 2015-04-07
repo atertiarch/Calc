@@ -5,6 +5,8 @@ import java.lang.ArithmeticException;
 
 public class Calculator {	
 	
+	private static final List<String> operators = Arrays.asList(new String[]{"+","-","*","/","(",")","^"});
+	
 	public static void main(String[] args) {
 		Scanner user_input = new Scanner(System.in);	
 		System.out.println("What do you want to calculate dear sire?");
@@ -17,7 +19,7 @@ public class Calculator {
 	
 
 	public static Vector<String> calculations(String whatToCalc) {
-		List<String> operators = Arrays.asList(new String[]{"+","-","*","/","(",")","^"});
+		
 		Vector<String> vString = new Vector<String>(0, 3);	    
 		Vector<String> vSorted = new Vector<String>(0, 1);
 	    
