@@ -1,10 +1,21 @@
 package calculator;
 import java.util.*;
-import java.lang.ArithmeticException;
 
 
 public class Calculator {	
 	
+	private static final String CLOSING_BRACKET = ")";
+	private static final String OPENING_BRACKET = "(";
+
+	private static final List<String> operators = new ArrayList<>();
+	static{
+		operators.addAll(ArithmeticCalculator.getSupportedOperatos());
+		operators.add(OPENING_BRACKET);
+		operators.add(CLOSING_BRACKET);
+	}
+
+
+
 	public static void main(String[] args) {
 		Scanner user_input = new Scanner(System.in);	
 		System.out.println("What do you want to calculate dear sire?");
@@ -39,10 +50,10 @@ public class Calculator {
 	    //put everything into vector
 	    String a ="";
 	    for (int i=0; i<whatToCalc.length(); i++){
-	    	if(a.isEmpty() && ArithmeticCalculator.getSupportedOperatos().contains(whatToCalc.substring(i,i+1))){
+	    	if(a.isEmpty() && operators.contains(whatToCalc.substring(i,i+1))){
 	    		vString.add(new String(whatToCalc.substring(i,i+1)));	
 			}
-			else if(a.length()>0 && ArithmeticCalculator.getSupportedOperatos().contains(whatToCalc.substring(i,i+1))){	
+			else if(a.length()>0 && operators.contains(whatToCalc.substring(i,i+1))){	
 				vString.add(new String(a));
 				vString.add(new String(whatToCalc.substring(i,i+1)));
 				a="";
@@ -67,10 +78,10 @@ public class Calculator {
 	    
 	    for(int i=0; i<vString.size(); i++){
 	    	
-	    	if(vString.get(i).equals("(")){
+	    	if(vString.get(i).equals(OPENING_BRACKET)){
 	    	}
 	    	
-	    	else if(vString.get(i).equals(")")){
+	    	else if(vString.get(i).equals(CLOSING_BRACKET)){
 	    		if (!stos.isEmpty()){
 	    			stos = emptyStos(vSorted, stos);
 		    	}
@@ -78,7 +89,7 @@ public class Calculator {
 	    	}
 	    	
 	    	//if value is an operator 
-	    	else if(ArithmeticCalculator.getSupportedOperatos().contains(vString.get(i))){
+	    	else if(operators.contains(vString.get(i))){
 		    	stos = stos.concat(vString.get(i));
 		    	
 		    	
@@ -88,7 +99,7 @@ public class Calculator {
 	    	else {
 	    		vSorted.add(vString.get(i));	
 	    		
-	    		if(i>2 && vString.get(i-2).equals(")")){
+	    		if(i>2 && vString.get(i-2).equals(CLOSING_BRACKET)){
 	    			vSorted.add(stos.substring(stos.length()-1, stos.length()));
 		    		stos = stos.substring(0, stos.length()-1);
 	    			}

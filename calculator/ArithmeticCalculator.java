@@ -8,7 +8,7 @@ import java.util.Vector;
 
 public class ArithmeticCalculator {
 	
-	private static final List<String> operators = Arrays.asList(new String[]{"+","-","*","/","(",")","^"});
+	private static final List<String> operators = Arrays.asList(new String[]{"+","-","*","/","^"});
 
 	private static final Map<String, Operation> map = new HashMap<>();
 	static{
