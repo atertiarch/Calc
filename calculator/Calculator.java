@@ -52,10 +52,7 @@ public class Calculator {
 	    	
 	    	else if(vString.get(i).equals(")")){
 	    		if (!stos.isEmpty()){
-	    			while(!stos.isEmpty()){
-			    		vSorted.add(stos.substring(stos.length()-1, stos.length()));
-			    		stos = stos.substring(0, stos.length()-1);
-			    		}
+	    			stos = emptyStos(vSorted, stos);
 		    	}
 	    		
 	    	}
@@ -76,10 +73,7 @@ public class Calculator {
 		    		stos = stos.substring(0, stos.length()-1);
 	    			}
 	    		else if (i==vString.size()-1){
-	    			while(!stos.isEmpty()){
-			    		vSorted.add(stos.substring(stos.length()-1, stos.length()));
-			    		stos = stos.substring(0, stos.length()-1);
-			    		}
+	    			stos = emptyStos(vSorted, stos);
 		    	}
 	    	}
 	    
@@ -100,38 +94,27 @@ public class Calculator {
 			    c=Double.parseDouble(vSorted.get(i-1));
 			    d=Double.parseDouble(vSorted.get(i-2));
 			    x=d-c;
-			    vSorted.set(i, String.valueOf(x));
-			    vSorted.remove(i-1);
-			    vSorted.remove(i-2);  
-			    i=0;
+			    i = removeValuesFromString(vSorted, i, x);
+
 			}
 		    else if(vSorted.get(i).equals("+")){
 			    c=Double.parseDouble(vSorted.get(i-1));
 			    d=Double.parseDouble(vSorted.get(i-2));
 			    x=d+c;
-			    vSorted.set(i, String.valueOf(x));
-			    vSorted.remove(i-1);
-			    vSorted.remove(i-2);  
-			    i=0;
+			    i = removeValuesFromString(vSorted, i, x);
 			}
 		    else if(vSorted.get(i).equals("*")){
 		    	c=Double.parseDouble(vSorted.get(i-1));
 		    	d=Double.parseDouble(vSorted.get(i-2));
 		    	x=d*c;
-		    	vSorted.set(i, String.valueOf(x));
-		    	vSorted.remove(i-1);
-		    	vSorted.remove(i-2);  
-		    	i=0;
+		    	i = removeValuesFromString(vSorted, i, x);
 		    }
 		    else if(vSorted.get(i).equals("/")){
 		    	c=Double.parseDouble(vSorted.get(i-1));
 		    	d=Double.parseDouble(vSorted.get(i-2));
 		    	if (c!=0)	{
 			    	x=d/c;
-			    	vSorted.set(i, String.valueOf(x));
-			    	vSorted.remove(i-1);
-			    	vSorted.remove(i-2);  
-			    	i=0;
+			    	i = removeValuesFromString(vSorted, i, x);
 			    	}
 		    	else	{
 		    		throw new ArithmeticException("Nigdy cholero nie dziel przez 0!");
@@ -141,15 +124,32 @@ public class Calculator {
 		    	c=Double.parseDouble(vSorted.get(i-1));
 		    	d=Double.parseDouble(vSorted.get(i-2));
 		    	x=Math.pow(d, c);
-		    	vSorted.set(i, String.valueOf(x));
-		    	vSorted.remove(i-1);
-		    	vSorted.remove(i-2);  
-		    	i=0;
+		    	i = removeValuesFromString(vSorted, i, x);
 		    }
-		    else i++;	    	
+		    else i++;	
+	    	
 	    }
 		return vSorted;
 
 
 	    }
+
+
+	private static int removeValuesFromString(Vector<String> vSorted, int i,
+			double x) {
+		vSorted.set(i, String.valueOf(x));
+		vSorted.remove(i-1);
+		vSorted.remove(i-2);  
+		i=0;
+		return i;
 	}
+
+
+	private static String emptyStos(Vector<String> vSorted, String stos) {
+		while(!stos.isEmpty()){
+			vSorted.add(stos.substring(stos.length()-1, stos.length()));
+			stos = stos.substring(0, stos.length()-1);
+			}
+		return stos;
+	}
+}
