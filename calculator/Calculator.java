@@ -5,8 +5,6 @@ import java.lang.ArithmeticException;
 
 public class Calculator {	
 	
-	private static final List<String> operators = ArithmeticCalculator.getSupportedOperatos();
-	
 	public static void main(String[] args) {
 		Scanner user_input = new Scanner(System.in);	
 		System.out.println("What do you want to calculate dear sire?");
@@ -41,10 +39,10 @@ public class Calculator {
 	    //put everything into vector
 	    String a ="";
 	    for (int i=0; i<whatToCalc.length(); i++){
-	    	if(a.isEmpty() && operators.contains(whatToCalc.substring(i,i+1))){
+	    	if(a.isEmpty() && ArithmeticCalculator.getSupportedOperatos().contains(whatToCalc.substring(i,i+1))){
 	    		vString.add(new String(whatToCalc.substring(i,i+1)));	
 			}
-			else if(a.length()>0 && operators.contains(whatToCalc.substring(i,i+1))){	
+			else if(a.length()>0 && ArithmeticCalculator.getSupportedOperatos().contains(whatToCalc.substring(i,i+1))){	
 				vString.add(new String(a));
 				vString.add(new String(whatToCalc.substring(i,i+1)));
 				a="";
@@ -80,7 +78,7 @@ public class Calculator {
 	    	}
 	    	
 	    	//if value is an operator 
-	    	else if(operators.contains(vString.get(i))){
+	    	else if(ArithmeticCalculator.getSupportedOperatos().contains(vString.get(i))){
 		    	stos = stos.concat(vString.get(i));
 		    	
 		    	
