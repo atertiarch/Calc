@@ -44,43 +44,7 @@ public class Calculator {
 	    System.out.println("Not sorted: " + vString.toString());   
 	    
 	    //sorting
-	    Vector<String> vSorted;
-	    vSorted=new Vector<String>(0, 1);
-	    String stos="";
-	    
-	    for(int i=0; i<vString.size(); i++){
-	    	
-	    	if(vString.get(i).equals("(")){
-	    	}
-	    	
-	    	else if(vString.get(i).equals(")")){
-	    		if (!stos.isEmpty()){
-	    			stos = emptyStos(vSorted, stos);
-		    	}
-	    		
-	    	}
-	    	
-	    	//if value is an operator 
-	    	else if(operators.contains(vString.get(i))){
-		    	stos = stos.concat(vString.get(i));
-		    	
-		    	
-	    		}
-	    	
-	    	//if number
-	    	else {
-	    		vSorted.add(vString.get(i));	
-	    		
-	    		if(i>2 && vString.get(i-2).equals(")")){
-	    			vSorted.add(stos.substring(stos.length()-1, stos.length()));
-		    		stos = stos.substring(0, stos.length()-1);
-	    			}
-	    		else if (i==vString.size()-1){
-	    			stos = emptyStos(vSorted, stos);
-		    	}
-	    	}
-	    
-	    }
+	    Vector<String> vSorted= sortInput(vString);
 	
 	    System.out.println("Sorted: " + vSorted.toString());   
 	    
@@ -136,6 +100,47 @@ public class Calculator {
 
 
 	    }
+
+
+	private static Vector<String> sortInput(Vector<String> vString) {
+		Vector<String> vSorted=new Vector<String>(0, 1);
+	    String stos="";
+	    
+	    for(int i=0; i<vString.size(); i++){
+	    	
+	    	if(vString.get(i).equals("(")){
+	    	}
+	    	
+	    	else if(vString.get(i).equals(")")){
+	    		if (!stos.isEmpty()){
+	    			stos = emptyStos(vSorted, stos);
+		    	}
+	    		
+	    	}
+	    	
+	    	//if value is an operator 
+	    	else if(operators.contains(vString.get(i))){
+		    	stos = stos.concat(vString.get(i));
+		    	
+		    	
+	    		}
+	    	
+	    	//if number
+	    	else {
+	    		vSorted.add(vString.get(i));	
+	    		
+	    		if(i>2 && vString.get(i-2).equals(")")){
+	    			vSorted.add(stos.substring(stos.length()-1, stos.length()));
+		    		stos = stos.substring(0, stos.length()-1);
+	    			}
+	    		else if (i==vString.size()-1){
+	    			stos = emptyStos(vSorted, stos);
+		    	}
+	    	}
+	    
+	    }
+		return vSorted;
+	}
 
 
 	private static int removeValuesFromString(Vector<String> vSorted, int i,
