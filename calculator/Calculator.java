@@ -28,7 +28,13 @@ public class Calculator {
 	
 	    System.out.println("Sorted: " + vSorted.toString());   
 	    
-	    //calculation
+	    return calculateExpression(vSorted);
+
+    }
+
+
+	private static Vector<String> calculateExpression(Vector<String> vSorted) {
+		//calculation
 		int i=0;
 	    
     	double c;
@@ -76,9 +82,7 @@ public class Calculator {
 	    	
 	    }
 		return vSorted;
-
-
-	    }
+	}
 
 
 	private static Vector<String> putInputIntoVector(String whatToCalc) {
