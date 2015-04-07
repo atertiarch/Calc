@@ -1,13 +1,24 @@
-package calculator;
+package calculator;	
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 public class ArithmeticCalculator {
 	
 	private static final List<String> operators = Arrays.asList(new String[]{"+","-","*","/","(",")","^"});
 
+	private static final Map<String, Operation> map = new HashMap<>();
+	static{
+		map.put("+", ArithmeticCalculator::add);
+		map.put("-", ArithmeticCalculator::substract);
+		map.put("*", ArithmeticCalculator::multiply);
+		map.put("/", ArithmeticCalculator::divide);
+		map.put("^", ArithmeticCalculator::power);
+	}
+	
 	public static List<String> getSupportedOperatos(){
 		return operators;
 	}
@@ -17,21 +28,10 @@ public class ArithmeticCalculator {
 		int i=0;
 	    
 	    while(operators.contains(vSorted.lastElement())){
-	    	if(vSorted.get(i).equals("-")){
-			    i = substract(vSorted, i);
-			}
-		    else if(vSorted.get(i).equals("+")){
-			    i = add(vSorted, i);
-			}
-		    else if(vSorted.get(i).equals("*")){
-		    	i = multiply(vSorted, i);
-		    }
-		    else if(vSorted.get(i).equals("/")){
-		    	i = divide(vSorted, i);
-		    }
-		    else if(vSorted.get(i).equals("^")){
-		    	i = power(vSorted, i);
-		    }
+
+	    	if(map.containsKey(vSorted.get(i))){
+	    		i=map.get(vSorted.get(i)).doOperation(vSorted, i);	    		
+	    	}
 		    else i++;	
 	    	
 	    }
