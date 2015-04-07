@@ -16,10 +16,6 @@ public class ArithmeticCalculator {
 		//calculation
 		int i=0;
 	    
-    	double c;
-	    double d;
-	    double x;
-
 	    while(operators.contains(vSorted.lastElement())){
 	    	if(vSorted.get(i).equals("-")){
 			    i = substract(vSorted, i);
